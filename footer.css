@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.foot {
+    color: rgb(191, 214, 59);
+}
+
+footer {
+    background-color: #244b49;
+    padding: 2% 8%;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    font-family: sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}

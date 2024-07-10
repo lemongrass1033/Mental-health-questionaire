@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suggestions</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="suggestions.css">
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-3 mb-4">
+        <h1>Methods</h1>
+    </header>
+    <div class="container">
+        <div id="suggestions"></div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const meanScores = JSON.parse(localStorage.getItem('meanScores'));
+            const suggestionsDiv = document.getElementById('suggestions');
+            const sections = {
+                kemurungan: 'Depression',
+                kebimbangan: 'Anxiety',
+                tekanan: 'Stress',
+                ketakutan: 'Fear'
+            };
+
+            Object.keys(sections).forEach(section => {
+                const score = meanScores[section];
+                const suggestions = getSuggestions(section, score);
+                const suggestionElement = document.createElement('div');
+                suggestionElement.classList.add('mb-4');
+                suggestionElement.innerHTML = `
+                    <div class="card">
+                        <div class="card-header bg-info text-white">
+                            <h2>${sections[section]}</h2>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Mean Score:</strong> ${score}</p>
+                            <p style="font-size: 19px;">Here are a few steps you can take:</p>
+                            <ul>${suggestions}</ul>
+                        </div>
+                    </div>`;
+                suggestionsDiv.appendChild(suggestionElement);
+            });
+        });
+
+        function getSuggestions(section, score) {
+            const suggestions = {
+                kemurungan: {
+                    low: [
+                        '-Prayer',
+                        '-Read religious book',
+                        '-Positive thinking',
+                        '-Taking a short break',
+                        '-Listening to music'
+                       
+                    ],
+                    moderate: [
+                        '-Exercising',
+                        '-Sharing problems',
+                        '-Meditation',
+                        '-Enjoying nature',
+                        '-Managing emotion',
+                        '-Peer support'
+                        
+                    ],
+                    high: [
+                        '-Counselor guidance',
+                        '-Inner resilience',
+                        '-Realistic self-acceptance',
+                        '-Nurturing relationships with family members',
+                        '-Nurturing relationships with peers',
+                        '-Watching movies'
+                       
+                    ]
+                },
+                kebimbangan: {
+                    low: [
+                        '-Prayer',
+                        '-Read religious book',
+                        '-Positive thinking',
+                        '-Exercising',
+                        '-Getting enough sleep',
+                       
+                    ],
+                    moderate: [
+                        '-Exercising',
+                        '-Sharing problems',
+                        '-Good time management',
+                        '-Healthy lifestyle',
+                        '-Realistic self-acceptance'
+                       
+                    ],
+                    high: [
+                        '-Nurturing relationships with family members',
+                        '-Nurturing relationships with peers',
+                        '-Participating in soft skills programs',
+                        '-Controlled use of gadget applications',
+                        '-Understanding cultural lifestyles'
+                       
+                    ]
+                },
+                tekanan: {
+                    low: [
+                        '-Prayer',
+                        '-Positive thinking',
+                        '-Exercising',
+                        '-Recreational activities',
+                        '-Taking a short break',
+                        '-Listening to music',
+                        
+                    ],
+                    moderate: [
+                        '-Exercising',
+                        '-Sharing problems',
+                        '-Enjoying nature',
+                        '-Good time management',
+                        '-Control emotion',
+                        '-Peer support',
+                        '-Counselor guidance'
+                    ],
+                    high: [
+                        '-Problem-solving techniques',
+                        '-Healthy lifestyles',
+                        '-Nurturing relationships with family members',
+                        '-Participating in soft skills programs',
+                        '-Controlled use of gadget applications',
+                        '-Watching movies',
+                        '-Understanding cultural lifestyles'
+                    ]
+                },
+                ketakutan: {
+                    low: [
+                        '-Reading religious book',
+                        '-Recreational activities',
+                        '-Taking a short break',
+                        '-Listening to music',
+                        '-Exercising'
+                    ],
+                    moderate: [
+                        '-Sharing problems',
+                        '-Enjoying nature',
+                        '-Good time management',
+                        '-Peer support'
+                    ],
+                    high: [
+                        '-Counselor guidance',
+                        '-Inner resilience',
+                        '-Nurturing relationships with family members',
+                        '-Participating in soft skills programs',
+                        '-Understanding cultural lifestyles'
+                    ]
+                }
+            };
+
+            let selectedSuggestions = [];
+            if (score <= 2.33) {
+                selectedSuggestions = suggestions[section].low;
+            } else if (score <= 3.66) {
+                selectedSuggestions = suggestions[section].moderate;
+            } else {
+                selectedSuggestions = suggestions[section].high;
+            }
+
+            return selectedSuggestions.map(suggestion => `<li>${suggestion}</li>`).join('');
+        }
+    </script>
+</body>
+</html>

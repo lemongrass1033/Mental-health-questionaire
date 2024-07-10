@@ -1,0 +1,38 @@
+/* suggestions.css */
+body {
+    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+    color: #333;
+    background-color: #e6f7ff;
+}
+
+header {
+    background-color: #6c757d !important;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.card-header {
+    font-size: 1.5em;
+    background-color: #17a2b8 !important;
+}
+
+.card-body ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.card-body ul li {
+    margin-bottom: 10px;
+}
